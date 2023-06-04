@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sync-html-files
+spec:
+  template:
+    spec:
+      containers:
+        - name: sync-html-files
+          image: google/cloud-sdk
+          command: ["gsutil", "cp", "-r", "gs://<bucket-name>/*.html", "/tmp"]
+      restartPolicy: Never
+  backoffLimit: 4
